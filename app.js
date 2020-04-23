@@ -2,10 +2,13 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 const routesContacts = require('./routes/contacts')
 const routesUsers = require('./routes/users')
 const routeVerify = require('./routes/verify')
+
+app.use(cors())
 
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -15,17 +18,17 @@ app.use('/contacts', routesContacts)
 app.use('/users', routesUsers)
 app.use('/verify', routeVerify)
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*')
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', '*')
+//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
 
-    if (req.method === "OPTIONS") {
-        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS')
-        return res.status(200).send({})
-    }
+//     if (req.method === "OPTIONS") {
+//         res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS')
+//         return res.status(200).send({})
+//     }
 
-    next()
-})
+//     next()
+// })
 
 app.use((req, res, next) => {
     const erro = new Error('Endpoint não encontrado')
