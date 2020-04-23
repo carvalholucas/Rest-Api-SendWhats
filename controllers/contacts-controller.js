@@ -35,8 +35,8 @@ exports.getContactById = (req, res, next) => {
 }
 
 exports.addContact = (req, res, next) => {
-    const query = 'INSERT INTO Contacts (number, message, id_user, link) VALUES (?, ?, ?, ?)'
-    const values = [req.body.number, req.body.message, req.body.id_user, req.body.link]
+    const query = 'INSERT INTO Contacts (name, number, message, id_user, link) VALUES (?, ?, ?, ?)'
+    const values = [req.body.name, req.body.number, req.body.message, req.body.id_user, req.body.link]
 
     mysql.getConnection((error, conn) => {
         if (error) { return res.status(500).send({ error: error }) }
