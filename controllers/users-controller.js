@@ -15,7 +15,7 @@ exports.newUser = (req, res, next) => {
                 bcrypt.hash(req.body.password, 10, (errBcrypt, hash) => {
                     if (errBcrypt) { return res.status(500).send({ error: errBcrypt }) }
 
-                    conn.query('INSERT INTO Users (email, password) VALUES (?, ?)', [req.body.email, hash], (error, result) => {
+                    conn.query('INSERT INTO Users (name, email, password) VALUES (?, ?)', [req.body.name, req.body.email, hash], (error, result) => {
                         conn.release()
 
                         if (error) { return res.status(500).send({ error: error }) }
@@ -53,7 +53,8 @@ exports.authUser = (req, res, next) => {
                     const token = jwt.sign(
                         {
                             id_usuario: results[0].id_usuario,
-                            email: results[0].email
+                            email: results[0].email,
+                            name: results[0].name
                         },
                         process.env.JWT_KEY,
                         {
