@@ -14,7 +14,7 @@ exports.newUser = (req, res, next) => {
             } else {
                 bcrypt.hash(req.body.password, 10, (errBcrypt, hash) => {
                     if (errBcrypt) { return res.status(500).send({ error: errBcrypt }) }
-
+                    console.log(req.body.password, hash)
                     conn.query('INSERT INTO Users (name, email, password) VALUES (?, ?)', [req.body.name, req.body.email, hash], (error, result) => {
                         conn.release()
 
