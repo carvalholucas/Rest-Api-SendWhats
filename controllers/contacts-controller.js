@@ -2,7 +2,7 @@ const mysql = require('../mysql')
 
 exports.getAllContacts = (req, res, next) => {
     const id = req.query.id_user
-    const query = `SELECT * FROM Contacts ${id ? 'WHERE id_user = ?' : ''}`
+    const query = `SELECT c.*, u.name FROM Contacts as c LEFT JOIN Users as u ON c.id_user = u.id ${id ? 'WHERE id_user = ?' : ''}`
 
     mysql.getConnection((error, conn) => {
         if (error) { return res.status(500).send({ error: error }) }
