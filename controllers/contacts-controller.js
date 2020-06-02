@@ -35,8 +35,8 @@ exports.getContactById = (req, res, next) => {
 }
 
 exports.addContact = (req, res, next) => {
-    const query = 'INSERT INTO Contacts (number, message, id_user, link) VALUES (?, ?, ?, ?)'
-    const values = [req.body.number, req.body.message, req.body.id_user, req.body.link]
+    const query = 'INSERT INTO Contacts (title, number, message, id_user, link) VALUES (?, ?, ?, ?, ?)'
+    const values = [req.body.title, req.body.number, req.body.message, req.body.id_user, req.body.link]
 
     mysql.getConnection((error, conn) => {
         if (error) { return res.status(500).send({ error: error }) }
@@ -55,9 +55,9 @@ exports.addContact = (req, res, next) => {
 }
 
 exports.editContact = (req, res, next) => {
-    const query = 'UPDATE Contacts SET number = ?, message = ?, link = ? WHERE id = ?'
+    const query = 'UPDATE Contacts SET title = ?, number = ?, message = ?, link = ? WHERE id = ?'
     const id = req.params.id
-    const values = [req.body.number, req.body.message, req.body.link, id]
+    const values = [req.body.title, req.body.number, req.body.message, req.body.link, id]
 
     mysql.getConnection((error, conn) => {
         if (error) { return res.status(500).send({ error: error }) }
