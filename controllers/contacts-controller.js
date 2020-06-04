@@ -47,7 +47,7 @@ exports.addContact = (req, res, next) => {
                 if (error) return res.status(500).send({ error: error })
 
                 res.status(201).send({
-                    message: 'Contato inserido com sucesso',
+                    message: 'Link criado com sucesso',
                     id: result.insertId
                 })
             })
@@ -67,7 +67,7 @@ exports.editContact = (req, res, next) => {
 
                 if (error) return res.status(500).send({ error: error })
 
-                res.status(202).send({ message: 'Contato alterado com sucesso' })
+                res.status(202).send({ message: 'Contato criado com sucesso' })
             }
         )
     })
